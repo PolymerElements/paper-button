@@ -1,0 +1,111 @@
+<!--
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<!--
+/**
+ * @module Quantum Paper Elements
+ */
+/**
+ * paper-button
+ *
+ * Example:
+ *
+ *    <paper-button></paper-button>
+ *
+ * @class paper-button
+ */
+-->
+<link rel="import" href="../polymer/polymer.html">
+<polymer-element name="paper-button" extends="button" on-pointerenter="{{enter}}" on-pointerleave="{{leave}}">
+  <template>
+    <style>
+      :host {
+        position: relative;
+        min-width: 128px;
+        min-height: 32px;
+        padding: 0;
+        border: none;
+        border-bottom: 1px solid silver;
+        overflow: hidden;
+      }
+      span {
+        position: relative;
+        pointer-events: none;
+        transition: font-size ease-in 0.1s;
+        z-index: 2;
+        text-transform: uppercase;
+        font-size: 0.7em;
+        font-weight: bold;
+      }
+      span[focus] {
+        font-size: 0.9em;
+      }
+      ink {
+        display: inline-block;
+        position: absolute;
+        top: 16px;
+        left: 64px;
+        width: 0px;
+        height: 0px;
+        border-radius: 128px;
+        background-color: rgba(32, 32, 32, 0.2);
+        vertical-align: middle;
+        transition: all ease-out 0.4s;
+        pointer-events: none;
+      }
+      ink[light] {
+        background-color: rgba(224, 224, 224, 1);
+      }
+      :host([dark]) {
+        background-color: rgba(32, 32, 32, 0.2);
+      }
+    </style>
+    <span id="span"><content></content></span>
+    <ink id="ink"></ink>
+  </template>
+  <script>
+    Polymer('paper-button', {
+      ready: function() {
+      },
+      enter: function(event) {
+        var ox = event.offsetX;
+        var oy = event.offsetY;
+        oy = 16;
+        this.removeAttribute('dark');
+        this.$.ink.removeAttribute('light');
+        this.$.span.removeAttribute('focus');
+        this.spill(ox, oy);
+        this.async(function() {
+          this.$.span.setAttribute('focus', true);
+        });
+        this.ox = ox;
+        this.oy = oy;
+      },
+      spill: function(ox, oy) {
+        var ink = this.$.ink.style;
+        ink.transition = 'none';
+        ink.width = '8px';
+        ink.height = '8px';
+        ink.left = ox - 4 + 'px';
+        ink.top = oy - 4 + 'px';
+        this.async(function() {
+          ink.transition = '';
+          ink.width = '256px';
+          ink.height = '256px';
+          ink.left = ox - 128 + 'px';
+          ink.top = oy - 128 + 'px';
+        });
+      },
+      leave: function() {
+        this.setAttribute('dark', true);
+        this.$.ink.setAttribute('light', true);
+        this.spill(this.ox, this.oy);
+        this.async(function() {
+          this.$.span.removeAttribute('focus');
+        });
+      }
+    });
+  </script>
+</polymer-element>
