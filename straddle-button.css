@@ -7,6 +7,7 @@ license that can be found in the LICENSE file.
 /* temporary location for straddle (round floating) button */
 
 button.straddle {
+  display: inline-block;
   width: 48px;
   height: 48px;
   margin: 0;
