@@ -1,7 +1,7 @@
 :host {
   position: relative;
   border: 0;
-  padding: 1em;
+  padding: 0.5em 1em;
   background: transparent;
   text-align: center;
   font: inherit;
