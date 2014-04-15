@@ -1,0 +1,31 @@
+:host {
+  position: relative;
+  border: 0;
+  padding: 1em;
+  background: transparent;
+  text-align: center;
+  font: inherit;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+:host:focus {
+  background: #ddd;
+}
+
+:host([disabled]) {
+  background: #ddd !important;
+  color: #999 !important;
+}
+
+#ink {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+}
+
+:host > div {
+  position: relative;
+}

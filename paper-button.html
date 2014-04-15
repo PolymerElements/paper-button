@@ -21,95 +21,66 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  * @class paper-button
  */
 -->
-<link rel="import" href="../polymer/polymer.html">
-<polymer-element name="paper-button" extends="button" on-pointerenter="{{enter}}" on-pointerleave="{{leave}}">
+
+<link href="../polymer/polymer.html" rel="import">
+<link href="../paper-ink/paper-ink.html" rel="import">
+
+<polymer-element name="paper-button" extends="button" attributes="bordered inkColor" on-tap="{{tapAction}}" on-pointerdown="{{pointerdownAction}}" on-pointerleave="{{pointerleaveAction}}">
+
   <template>
-    <style>
-      :host {
-        position: relative;
-        min-width: 128px;
-        min-height: 32px;
-        padding: 0;
-        border: none;
-        border-bottom: 1px solid silver;
-        overflow: hidden;
-      }
-      span {
-        position: relative;
-        pointer-events: none;
-        transition: font-size ease-in 0.1s;
-        z-index: 2;
-        text-transform: uppercase;
-        font-size: 0.7em;
-        font-weight: bold;
-      }
-      span[focus] {
-        font-size: 0.9em;
-      }
-      ink {
-        display: inline-block;
-        position: absolute;
-        top: 16px;
-        left: 64px;
-        width: 0px;
-        height: 0px;
-        border-radius: 128px;
-        background-color: rgba(32, 32, 32, 0.2);
-        vertical-align: middle;
-        transition: all ease-out 0.4s;
-        pointer-events: none;
-      }
-      ink[light] {
-        background-color: rgba(224, 224, 224, 1);
-      }
-      :host([dark]) {
-        background-color: rgba(32, 32, 32, 0.2);
-      }
-    </style>
-    <span id="span"><content></content></span>
-    <ink id="ink"></ink>
+
+    <link href="paper-button.css" rel="stylesheet">
+
+    <paper-ink id="ink" color="{{inkColor}}"></paper-ink>
+    <div><content></content></div>
+
   </template>
+
   <script>
     Polymer('paper-button', {
-      ready: function() {
+
+      inkColor: '#ccc',
+
+      waitForSpillCompleted: function(callback) {
+        this.async(callback, null, (this.$.ink.spillCompleted ? 0 : this.duration));
       },
-      enter: function(event) {
-        var ox = event.offsetX;
-        var oy = event.offsetY;
-        oy = 16;
-        this.removeAttribute('dark');
-        this.$.ink.removeAttribute('light');
-        this.$.span.removeAttribute('focus');
-        this.spill(ox, oy);
-        this.async(function() {
-          this.$.span.setAttribute('focus', true);
-        });
-        this.ox = ox;
-        this.oy = oy;
+
+      resetInk: function() {
+        this.$.ink.reset();
       },
-      spill: function(ox, oy) {
-        var ink = this.$.ink.style;
-        ink.transition = 'none';
-        ink.width = '8px';
-        ink.height = '8px';
-        ink.left = ox - 4 + 'px';
-        ink.top = oy - 4 + 'px';
-        this.async(function() {
-          ink.transition = '';
-          ink.width = '256px';
-          ink.height = '256px';
-          ink.left = ox - 128 + 'px';
-          ink.top = oy - 128 + 'px';
+
+      tapAction: function() {
+        if (this.disabled) {
+          return;
+        }
+
+        this.waitForSpillCompleted(function() {
+          this.$.ink.evaporate();
         });
       },
-      leave: function() {
-        this.setAttribute('dark', true);
-        this.$.ink.setAttribute('light', true);
-        this.spill(this.ox, this.oy);
-        this.async(function() {
-          this.$.span.removeAttribute('focus');
-        });
+
+      pointerdownAction: function(e) {
+        if (this.disabled) {
+          return;
+        }
+
+        var rect = this.getBoundingClientRect();
+        var inkSize = Math.max(rect.width, rect.height) * 2;
+        this.$.ink.style.height = inkSize + 'px';
+        this.$.ink.style.width = inkSize + 'px';
+        this.$.ink.style.left = (e.x - rect.left - inkSize / 2) + 'px';
+        this.$.ink.style.top = (e.y - rect.top - inkSize / 2) + 'px';
+        this.$.ink.spill();
+      },
+
+      pointerleaveAction: function() {
+        if (this.disabled) {
+          return;
+        }
+
+        this.waitForSpillCompleted('resetInk');
       }
+
     });
   </script>
 </polymer-element>
