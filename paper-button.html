@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link href="../polymer/polymer.html" rel="import">
 <link href="../paper-ink/paper-ink.html" rel="import">
 
-<polymer-element name="paper-button" extends="button" attributes="inkColor" on-tap="{{tapAction}}" on-pointerdown="{{pointerdownAction}}" on-pointerleave="{{pointerleaveAction}}">
+<polymer-element name="paper-button" extends="button" attributes="inkColor" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
 
   <template>
 
@@ -59,7 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
       },
 
-      pointerdownAction: function(e) {
+      downAction: function(e) {
         if (this.disabled) {
           return;
         }
@@ -73,8 +73,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.$.ink.spill();
       },
 
-      pointerleaveAction: function() {
+      insideButton: function(x, y) {
+        var rect = this.getBoundingClientRect();
+        return (rect.left <= x) && (x <= rect.right) && (rect.top <= y) && (y <= rect.bottom);
+      },
+
+      upAction: function(e) {
         if (this.disabled) {
+          return;
+        }
+
+        // wait for tap event to reset ink
+        if (this.insideButton(e.x, e.y)) {
           return;
         }
 
