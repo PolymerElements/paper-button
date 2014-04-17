@@ -20,6 +20,19 @@
   color: #999 !important;
 }
 
+:host(.paper) {
+  transition: box-shadow 0.28s ease-in;
+  -webkit-transition: box-shadow 0.28s ease-in;
+}
+
+:host(.paper:focus) {
+  box-shadow: 0px 2px 5px #999;
+}
+
+:host(.paper[pressed]) {
+  box-shadow: 0px 5px 10px #999;
+}
+
 #ink {
   position: absolute;
   pointer-events: none;
