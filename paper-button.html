@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link href="../polymer/polymer.html" rel="import">
 <link href="../paper-ink/paper-ink.html" rel="import">
 
-<polymer-element name="paper-button" extends="button" attributes="inkColor" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
+<polymer-element name="paper-button" extends="button" attributes="inkColor pressed" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
 
   <template>
 
@@ -39,13 +39,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     Polymer('paper-button', {
 
+      /**
+       * The color of the ink that spreads when the button is tapped.
+       *
+       * @attribute inkColor
+       * @type string
+       * @default '#ccc'
+       */
       inkColor: '#ccc',
+
+      /**
+       * If true, the user is currently holding down the button.
+       *
+       * @attribute pressed
+       * @type boolean
+       * @default false
+       */
+      pressed: false,
 
       waitForSpillCompleted: function(callback) {
         this.async(callback, null, (this.$.ink.spillCompleted ? 0 : this.duration));
       },
 
       resetInk: function() {
+        this.pressed = false;
         this.$.ink.reset();
       },
 
@@ -55,6 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         this.waitForSpillCompleted(function() {
+          this.pressed = false;
           this.$.ink.evaporate();
         });
       },
@@ -63,6 +81,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (this.disabled) {
           return;
         }
+
+        this.pressed = true;
 
         var rect = this.getBoundingClientRect();
         var inkSize = Math.max(rect.width, rect.height) * 2;
@@ -87,6 +107,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (this.insideButton(e.x, e.y)) {
           return;
         }
+
+        this.pressed = false;
 
         this.waitForSpillCompleted('resetInk');
       }
