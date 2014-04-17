@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link href="../polymer/polymer.html" rel="import">
 <link href="../paper-ink/paper-ink.html" rel="import">
 
-<polymer-element name="paper-button" extends="button" attributes="inkColor pressed" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
+<polymer-element name="paper-button" attributes="inkColor pressed disabled" tabindex="-1" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
 
   <template>
 
@@ -56,6 +56,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @default false
        */
       pressed: false,
+
+      /**
+       * If true, the user cannot interact with this button.
+       *
+       * @attribute disabled
+       * @type boolean
+       * @default false
+       */
+      disabled: false,
+
+      ready: function() {
+        this.disabledChanged();
+      },
+
+      disabledChanged: function() {
+        if (this.disabled) {
+          this.removeAttribute('tabindex');
+        } else {
+          this.setAttribute('tabindex', -1);
+        }
+      },
 
       waitForSpillCompleted: function(callback) {
         this.async(callback, null, (this.$.ink.spillCompleted ? 0 : this.duration));

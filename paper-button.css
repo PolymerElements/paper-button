@@ -1,4 +1,5 @@
 :host {
+  display: inline-block;
   position: relative;
   border: 0;
   padding: 0.5em 1em;
@@ -9,6 +10,8 @@
   outline: none;
   overflow: hidden;
   border-radius: 3px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 :host(:focus) {
