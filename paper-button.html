@@ -25,14 +25,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link href="../polymer/polymer.html" rel="import">
 <link href="../paper-ink/paper-ink.html" rel="import">
 
-<polymer-element name="paper-button" attributes="inkColor pressed disabled" tabindex="-1" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
+<polymer-element name="paper-button" attributes="inkColor centerInk pressed disabled" tabindex="-1" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
 
   <template>
 
     <link href="paper-button.css" rel="stylesheet">
 
     <paper-ink id="ink" color="{{inkColor}}"></paper-ink>
-    <div><content></content></div>
+    <div>
+      <content></content>
+    </div>
 
   </template>
 
@@ -47,6 +49,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @default '#ccc'
        */
       inkColor: '#ccc',
+
+      /**
+       * If true, the ink will be centered in the button.
+       *
+       * @attribute centerInk
+       * @type boolean
+       * @default false
+       */
+      centerInk: false,
 
       /**
        * If true, the user is currently holding down the button.
@@ -106,11 +117,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.pressed = true;
 
         var rect = this.getBoundingClientRect();
-        var inkSize = Math.max(rect.width, rect.height) * 2;
+        var inkSize = Math.max(rect.width, rect.height) * (this.centerInk ? 1 : 2);
         this.$.ink.style.height = inkSize + 'px';
         this.$.ink.style.width = inkSize + 'px';
-        this.$.ink.style.left = (e.x - rect.left - inkSize / 2) + 'px';
-        this.$.ink.style.top = (e.y - rect.top - inkSize / 2) + 'px';
+        if (this.centerInk) {
+          this.$.ink.style.left = (rect.width - inkSize) / 2 + 'px';
+          this.$.ink.style.top = (rect.height - inkSize) / 2 + 'px';
+        } else {
+          this.$.ink.style.left = (e.x - rect.left - inkSize / 2) + 'px';
+          this.$.ink.style.top = (e.y - rect.top - inkSize / 2) + 'px';
+        }
         this.$.ink.spill();
       },
 

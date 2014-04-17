@@ -12,6 +12,9 @@ license that can be found in the LICENSE file.
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <script src="../platform/platform.js"></script>
   <link href="../font-roboto2/roboto2.html" rel="import">
+  <link href="../core-icon/core-icon.html" rel="import">
+  <link href="../core-iconset-svg/core-iconset-svg.html" rel="import">
+  <link href="../core-iconset-svg/social-icons.html" rel="import">
   <link href="paper-button.html" rel="import">
   <style>
     body {
@@ -24,6 +27,7 @@ license that can be found in the LICENSE file.
     h1 {
       margin-bottom: 2em;
     }
+
     section {
       display: inline-block;
       background: #eee;
@@ -33,10 +37,36 @@ license that can be found in the LICENSE file.
       margin: 1%;
       padding: 1em;
     }
+    section.wide {
+      width: 75%;
+      background: transparent;
+    }
 
     paper-button {
       margin: 1em;
       width: 10em;
+    }
+    paper-button.icon {
+      margin: 1em;
+      width: auto;
+      overflow: visible;
+    }
+    paper-button.icon:focus {
+      background: none;
+    }
+    paper-button[disabled].icon {
+      background: none !important;
+    }
+    paper-button[disabled].icon core-icon::shadow path {
+      fill: #ccc;
+    }
+    paper-button.icon.orange core-icon::shadow path {
+      fill: #fe774d;
+    }
+    paper-button[pressed].icon.orange core-icon::shadow svg {
+      transition: transform 0.2s ease-in;
+      transform: scale(1.5);
+      transform-origin: 50% 50%;
     }
     paper-button.bordered {
       background: #ddd;
@@ -106,6 +136,18 @@ license that can be found in the LICENSE file.
     <paper-button class="paper colored" disabled>disabled</paper-button>
     <br>
     <div class="label">paper-colored</div>
+  </section>
+
+  <section class="wide">
+    <paper-button centerInk class="icon">
+      <core-icon icon="social:favorite"></core-icon>
+    </paper-button>
+    <paper-button centerInk class="icon orange" inkColor="#fec5c8">
+      <core-icon icon="social:favorite"></core-icon>
+    </paper-button>
+    <paper-button class="icon" disabled>
+      <core-icon icon="social:favorite"></core-icon>
+    </paper-button>
   </section>
 
 </body>
