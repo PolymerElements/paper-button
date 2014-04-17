@@ -40,5 +40,6 @@
 }
 
 :host > div {
+  /* needed to position the ink behind the content */
   position: relative;
 }
