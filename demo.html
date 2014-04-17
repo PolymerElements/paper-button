@@ -12,9 +12,9 @@ license that can be found in the LICENSE file.
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <script src="../platform/platform.js"></script>
   <link href="../font-roboto2/roboto2.html" rel="import">
-  <link href="../core-icon/core-icon.html" rel="import">
   <link href="../core-iconset-svg/core-iconset-svg.html" rel="import">
   <link href="../core-iconset-svg/social-icons.html" rel="import">
+  <link href="../core-icon/core-icon.html" rel="import">
   <link href="paper-button.html" rel="import">
   <style shim-shadowdom>
     body {
@@ -22,6 +22,8 @@ license that can be found in the LICENSE file.
       font-size: 14px;
       text-align: center;
       padding: 1em 2em;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
       transform: translateZ(0);
     }
     h1 {
@@ -65,8 +67,11 @@ license that can be found in the LICENSE file.
     }
     paper-button[pressed].icon.orange core-icon::shadow svg {
       transition: transform 0.2s ease-in;
+      -webkit-transition: -webkit-transform 0.2s ease-in;
       transform: scale(1.5);
+      -webkit-transform: scale(1.5);
       transform-origin: 50% 50%;
+      -webkit-transform-origin: 50% 50%;
     }
     paper-button.bordered {
       background: #ddd;
