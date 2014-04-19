@@ -117,7 +117,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.pressed = true;
 
         var rect = this.getBoundingClientRect();
-        var inkSize = Math.max(rect.width, rect.height) * (this.centerInk ? 1 : 2);
+        // We want the ink to propagate from the interaction point to the
+        // furthest point within the container; giving a consistent duration, no
+        // matter where the user interacts.
+        var relativeX = (this.centerInk) ? rect.width  / 2 : e.x - rect.left;
+        var relativeY = (this.centerInk) ? rect.height / 2 : e.y - rect.top;
+        var maxX = Math.max(relativeX, rect.width - relativeX);
+        var maxY = Math.max(relativeY, rect.height - relativeY);
+        var inkSize = Math.sqrt(maxX * maxX + maxY * maxY) * 2;
+
         this.$.ink.style.height = inkSize + 'px';
         this.$.ink.style.width = inkSize + 'px';
         if (this.centerInk) {
