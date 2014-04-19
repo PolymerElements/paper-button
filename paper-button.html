@@ -124,16 +124,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var relativeY = (this.centerInk) ? rect.height / 2 : e.y - rect.top;
         var maxX = Math.max(relativeX, rect.width - relativeX);
         var maxY = Math.max(relativeY, rect.height - relativeY);
-        var inkSize = Math.sqrt(maxX * maxX + maxY * maxY) * 2;
+        var inkDiameter = Math.sqrt(maxX * maxX + maxY * maxY) * 2;
 
-        this.$.ink.style.height = inkSize + 'px';
-        this.$.ink.style.width = inkSize + 'px';
+        this.$.ink.style.height = inkDiameter + 'px';
+        this.$.ink.style.width = inkDiameter + 'px';
         if (this.centerInk) {
-          this.$.ink.style.left = (rect.width - inkSize) / 2 + 'px';
-          this.$.ink.style.top = (rect.height - inkSize) / 2 + 'px';
+          this.$.ink.style.left = (rect.width - inkDiameter) / 2 + 'px';
+          this.$.ink.style.top = (rect.height - inkDiameter) / 2 + 'px';
         } else {
-          this.$.ink.style.left = (e.x - rect.left - inkSize / 2) + 'px';
-          this.$.ink.style.top = (e.y - rect.top - inkSize / 2) + 'px';
+          this.$.ink.style.left = (e.x - rect.left - inkDiameter / 2) + 'px';
+          this.$.ink.style.top = (e.y - rect.top - inkDiameter / 2) + 'px';
         }
         this.$.ink.spill();
       },
