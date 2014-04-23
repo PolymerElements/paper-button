@@ -24,16 +24,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link href="../polymer/polymer.html" rel="import">
 <link href="../paper-ink/paper-ink.html" rel="import">
+<link href="../paper-shadow/paper-shadow.html" rel="import">
 
-<polymer-element name="paper-button" attributes="inkColor centerInk pressed disabled" tabindex="-1" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
+<polymer-element name="paper-button" attributes="inkColor centerInk paper pressed disabled" tabindex="-1" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
 
   <template>
 
     <link href="paper-button.css" rel="stylesheet">
 
-    <paper-ink id="ink" color="{{inkColor}}"></paper-ink>
-    <div>
-      <content></content>
+    <paper-shadow id="shadow" z="{{z}}" animated></paper-shadow>
+
+    <div id="clip">
+      <paper-ink id="ink" color="{{inkColor}}"></paper-ink>
+      <div><content></content></div>
     </div>
 
   </template>
@@ -60,6 +63,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       centerInk: false,
 
       /**
+       * If true, the button will be styled with the "paper" theme.
+       */
+      paper: false,
+
+      /**
        * If true, the user is currently holding down the button.
        *
        * @attribute pressed
@@ -77,8 +85,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        */
       disabled: false,
 
+      z: 1,
+
       ready: function() {
         this.disabledChanged();
+      },
+
+      paperChanged: function() {
+        if (this.paper) {
+          this.$.shadow.target = this;
+        } else {
+          this.$.shadow.target = null;
+        }
       },
 
       disabledChanged: function() {
@@ -95,6 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       resetInk: function() {
         this.pressed = false;
+        this.z = 1;
         this.$.ink.reset();
       },
 
@@ -105,6 +124,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         this.waitForSpillCompleted(function() {
           this.pressed = false;
+          this.z = 1;
           this.$.ink.evaporate();
         });
       },
@@ -115,6 +135,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         this.pressed = true;
+        this.z = 2;
 
         var rect = this.getBoundingClientRect();
         // We want the ink to propagate from the interaction point to the
@@ -154,6 +175,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         this.pressed = false;
+        this.z = 1;
 
         this.waitForSpillCompleted('resetInk');
       }

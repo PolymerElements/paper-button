@@ -1,17 +1,18 @@
 :host {
   display: inline-block;
-  position: relative;
   border: 0;
-  padding: 0.5em 1em;
   background: transparent;
   text-align: center;
   font: inherit;
   text-transform: uppercase;
   outline: none;
-  overflow: hidden;
   border-radius: 3px;
   user-select: none;
   -webkit-user-select: none;
+}
+
+.paper-shadow-bottom {
+  border-radius: 3px;
 }
 
 :host(:focus) {
@@ -23,17 +24,11 @@
   color: #999 !important;
 }
 
-:host(.paper) {
-  transition: box-shadow 0.28s ease-in;
-  -webkit-transition: box-shadow 0.28s ease-in;
-}
-
-:host(.paper:focus) {
-  box-shadow: 0px 2px 5px #999;
-}
-
-:host(.paper[pressed]) {
-  box-shadow: 0px 5px 10px #999;
+#clip {
+  position: relative;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 #ink {
@@ -42,7 +37,7 @@
   width: 100%;
 }
 
-:host > div {
+#clip > div {
   /* needed to position the ink behind the content */
   position: relative;
 }

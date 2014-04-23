@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "polymer": "Polymer/polymer#master",
-    "paper-ink": "Polymer/paper-ink#master"
+    "paper-ink": "Polymer/paper-ink#master",
+    "paper-shadow": "Polymer/paper-shadow#master"
   }
 }
