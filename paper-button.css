@@ -9,6 +9,7 @@
   border-radius: 3px;
   user-select: none;
   -webkit-user-select: none;
+  cursor: pointer;
 }
 
 .paper-shadow-bottom {
@@ -30,6 +31,7 @@
 :host([disabled]) {
   background: #eaeaea !important;
   color: #a8a8a8 !important;
+  cursor: auto;
 }
 
 #clip {
