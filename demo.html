@@ -32,7 +32,7 @@ license that can be found in the LICENSE file.
 
     section {
       display: inline-block;
-      background: #eee;
+      background: #f7f7f7;
       border-radius: 3px;
       width: 25%;
       text-align: center;
@@ -48,6 +48,21 @@ license that can be found in the LICENSE file.
       margin: 1em;
       width: 10em;
     }
+
+    paper-button.colored {
+      color: #4285f4;
+    }
+    paper-button[raisedButton].colored {
+      background: #4285f4;
+      color: #fff;
+    }
+    paper-button[raisedButton].colored:hover {
+      background: #3367d6;
+    }
+    paper-button[raisedButton].colored:focus:not([pressed])::shadow #clip > #focusBg {
+      background: #3367d6;
+    }
+
     paper-button.icon {
       margin: 1em;
       width: auto;
@@ -73,13 +88,6 @@ license that can be found in the LICENSE file.
       transform-origin: 50% 50%;
       -webkit-transform-origin: 50% 50%;
     }
-    paper-button.bordered {
-      background: #ddd;
-    }
-    paper-button.colored {
-      background: #4285f4;
-      color: #fff;
-    }
 
     .label {
       text-align: left;
@@ -96,52 +104,24 @@ license that can be found in the LICENSE file.
   <section>
     <paper-button>button</paper-button>
     <br>
+    <paper-button class="colored">colored</paper-button>
+    <br>
     <paper-button disabled>disabled</paper-button>
     <br>
-    <div class="label">ink-borderless</div>
+    <div class="label">flat</div>
   </section>
 
   <section>
-    <paper-button class="bordered">button</paper-button>
+    <paper-button raisedButton>button</paper-button>
     <br>
-    <paper-button class="bordered" disabled>disabled</paper-button>
+    <paper-button raisedButton inkColor="#2a56c6" class="colored">colored</paper-button>
     <br>
-    <div class="label">ink-bordered</div>
-  </section>
-
-  <section>
-    <paper-button class="colored" inkColor="#3367d6">button</paper-button>
+    <paper-button raisedButton disabled>disabled</paper-button>
     <br>
-    <paper-button class="colored" disabled>disabled</paper-button>
-    <br>
-    <div class="label">ink-colored</div>
+    <div class="label">raised</div>
   </section>
 
   <br>
-
-  <section>
-    <paper-button paper>button</paper-button>
-    <br>
-    <paper-button paper disabled>disabled</paper-button>
-    <br>
-    <div class="label">paper-borderless</div>
-  </section>
-
-  <section>
-    <paper-button paper class="bordered">button</paper-button>
-    <br>
-    <paper-button paper class="bordered" disabled>disabled</paper-button>
-    <br>
-    <div class="label">paper-bordered</div>
-  </section>
-
-  <section>
-    <paper-button paper class="colored" inkColor="#3367d6">button</paper-button>
-    <br>
-    <paper-button paper class="colored" disabled>disabled</paper-button>
-    <br>
-    <div class="label">paper-colored</div>
-  </section>
 
   <section class="wide">
     <paper-button centerInk class="icon">

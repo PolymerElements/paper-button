@@ -15,13 +15,21 @@
   border-radius: 3px;
 }
 
-:host(:focus) {
-  background: #ddd;
+:host(:hover) {
+  background: #e4e4e4;
+}
+
+:host([raisedButton]) {
+  background: #dfdfdf;
+}
+
+:host([raisedButton]:hover) {
+  background: #d6d6d6;
 }
 
 :host([disabled]) {
-  background: #ddd !important;
-  color: #999 !important;
+  background: #eaeaea !important;
+  color: #a8a8a8 !important;
 }
 
 #clip {
@@ -29,6 +37,31 @@
   padding: 0.5em 1em;
   border-radius: 3px;
   overflow: hidden;
+}
+
+#focusBg {
+  -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host(:focus:not([pressed])) #clip > #focusBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 3px;
+  background: #c3c3c3;
+  -webkit-transition: none;
+  -webkit-animation: focus-fade 0.7s infinite alternate;
+}
+
+@-webkit-keyframes focus-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 #ink {
