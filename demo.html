@@ -39,10 +39,6 @@ license that can be found in the LICENSE file.
       margin: 1%;
       padding: 1em;
     }
-    section.wide {
-      width: 75%;
-      background: transparent;
-    }
 
     paper-button {
       margin: 1em;
@@ -61,32 +57,6 @@ license that can be found in the LICENSE file.
     }
     paper-button[raisedButton].colored:focus:not([pressed])::shadow #clip > #focusBg {
       background: #3367d6;
-    }
-
-    paper-button.icon {
-      margin: 1em;
-      width: auto;
-      overflow: visible;
-    }
-    paper-button.icon:focus {
-      background: none;
-    }
-    paper-button[disabled].icon {
-      background: none !important;
-    }
-    paper-button[disabled].icon core-icon::shadow path {
-      fill: #ccc;
-    }
-    paper-button.icon.orange core-icon::shadow path {
-      fill: #fe774d;
-    }
-    paper-button[pressed].icon.orange core-icon::shadow svg {
-      transition: transform 0.2s ease-in;
-      -webkit-transition: -webkit-transform 0.2s ease-in;
-      transform: scale(1.5);
-      -webkit-transform: scale(1.5);
-      transform-origin: 50% 50%;
-      -webkit-transform-origin: 50% 50%;
     }
 
     .label {
@@ -119,20 +89,6 @@ license that can be found in the LICENSE file.
     <paper-button raisedButton disabled>disabled</paper-button>
     <br>
     <div class="label">raised</div>
-  </section>
-
-  <br>
-
-  <section class="wide">
-    <paper-button centerInk class="icon">
-      <core-icon icon="social:favorite"></core-icon>
-    </paper-button>
-    <paper-button centerInk class="icon orange" inkColor="#fec5c8">
-      <core-icon icon="social:favorite"></core-icon>
-    </paper-button>
-    <paper-button class="icon" disabled>
-      <core-icon icon="social:favorite"></core-icon>
-    </paper-button>
   </section>
 
 </body>
