@@ -26,7 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link href="../paper-ink/paper-ink.html" rel="import">
 <link href="../paper-shadow/paper-shadow.html" rel="import">
 
-<polymer-element name="paper-button" attributes="inkColor centerInk raisedButton pressed disabled" tabindex="-1" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}" on-focus="{{focusAction}}" on-blur="{{blurAction}}">
+<polymer-element name="paper-button" attributes="inkColor centerInk raisedButton pressed focused disabled" tabindex="0" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}" on-focus="{{focusAction}}" on-blur="{{blurAction}}">
 
   <template>
 
@@ -84,6 +84,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           pressed: {value: false, reflect: true},
 
           /**
+           * If true, the button currently has focus.
+           *
+           * @attribute focused
+           * @type boolean
+           * @default false
+           */
+          focused: {value: false, reflect: true},
+
+          /**
            * If true, the user cannot interact with this button.
            *
            * @attribute disabled
@@ -116,7 +125,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           if (this.disabled) {
             this.removeAttribute('tabindex');
           } else {
-            this.setAttribute('tabindex', -1);
+            this.setAttribute('tabindex', 0);
           }
           this.adjustZ();
         },
@@ -136,14 +145,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         adjustZ: function() {
-          if (this.pressed) {
-            this.z = 3;
-          } else if (this.focused) {
-            this.z = 2;
-          } else if (this.disabled) {
-            this.z = 0;
+          if (this.focused) {
+            this.classList.add('paper-shadow-animate-z-1-z-2');
           } else {
-            this.z = 1;
+            this.classList.remove('paper-shadow-animate-z-1-z-2');
+
+            if (this.pressed) {
+              this.z = 2;
+            } else if (this.disabled) {
+              this.z = 0;
+            } else {
+              this.z = 1;
+            }
+
           }
         },
 
@@ -203,7 +217,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         focusAction: function() {
-          this.focused = true;
+          if (!this.pressed) {
+            // Only render the "focused" state if the element gains focus due to
+            // keyboard navigation.
+            this.focused = true;
+          }
         },
 
         blurAction: function() {
