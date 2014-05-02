@@ -19,14 +19,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  *    <paper-button></paper-button>
  *
  * @class paper-button
+ * @extends paper-focusable
  */
 -->
 
 <link href="../polymer/polymer.html" rel="import">
+<link href="../paper-focusable/paper-focusable.html" rel="import">
 <link href="../paper-ink/paper-ink.html" rel="import">
 <link href="../paper-shadow/paper-shadow.html" rel="import">
 
-<polymer-element name="paper-button" attributes="inkColor centerInk raisedButton pressed focused disabled" tabindex="0" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}" on-focus="{{focusAction}}" on-blur="{{blurAction}}">
+<polymer-element name="paper-button" extends="paper-focusable" attributes="inkColor raisedButton" tabindex="0" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
 
   <template>
 
@@ -72,34 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           /**
            * If true, the button will be styled as a "raised" button.
            */
-          raisedButton: {value: false, reflect: true},
-
-          /**
-           * If true, the user is currently holding down the button.
-           *
-           * @attribute pressed
-           * @type boolean
-           * @default false
-           */
-          pressed: {value: false, reflect: true},
-
-          /**
-           * If true, the button currently has focus.
-           *
-           * @attribute focused
-           * @type boolean
-           * @default false
-           */
-          focused: {value: false, reflect: true},
-
-          /**
-           * If true, the user cannot interact with this button.
-           *
-           * @attribute disabled
-           * @type boolean
-           * @default false
-           */
-          disabled: {value: false, reflect: true}
+          raisedButton: {value: false, reflect: true}
 
         },
 
@@ -122,11 +97,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         disabledChanged: function() {
-          if (this.disabled) {
-            this.removeAttribute('tabindex');
-          } else {
-            this.setAttribute('tabindex', 0);
-          }
+          this.super();
           this.adjustZ();
         },
 
@@ -212,20 +183,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
 
           this.pressed = false;
-
           this.waitForSpillCompleted('resetInk');
-        },
-
-        focusAction: function() {
-          if (!this.pressed) {
-            // Only render the "focused" state if the element gains focus due to
-            // keyboard navigation.
-            this.focused = true;
-          }
-        },
-
-        blurAction: function() {
-          this.focused = false;
         }
 
       });
