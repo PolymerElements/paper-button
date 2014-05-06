@@ -28,7 +28,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link href="../paper-ink/paper-ink.html" rel="import">
 <link href="../paper-shadow/paper-shadow.html" rel="import">
 
-<polymer-element name="paper-button" extends="paper-focusable" attributes="inkColor raisedButton" tabindex="0" on-tap="{{tapAction}}" on-down="{{downAction}}" on-up="{{upAction}}">
+<polymer-element name="paper-button" extends="paper-focusable" attributes="inkColor raisedButton" tabindex="0" on-tap="{{tapAction}}">
 
   <template>
 
@@ -71,7 +71,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         observe: {
           focused: 'adjustZ',
-          pressed: 'adjustZ'
         },
 
         z: 1,
@@ -87,6 +86,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         },
 
+        activeChanged: function() {
+          this.super();
+
+          this.adjustZ();
+
+          if (this.active) {
+            this.$.ink.spill();
+          } else {
+            this.waitForSpillCompleted('resetInk');
+          }
+        },
+
         disabledChanged: function() {
           this.super();
           this.adjustZ();
@@ -97,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         resetInk: function() {
-          this.pressed = false;
+          this.active = false;
           this.$.ink.reset();
         },
 
@@ -112,7 +123,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           } else {
             this.classList.remove('paper-shadow-animate-z-1-z-2');
 
-            if (this.pressed) {
+            if (this.active) {
               this.z = 2;
             } else if (this.disabled) {
               this.z = 0;
@@ -128,10 +139,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             return;
           }
 
-          this.waitForSpillCompleted(function() {
-            this.pressed = false;
-            this.$.ink.evaporate();
-          });
+          if (!this.isToggle) {
+            this.waitForSpillCompleted(function() {
+              this.active = false;
+              this.$.ink.evaporate();
+            });
+          }
         },
 
         downAction: function(e) {
@@ -139,7 +152,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             return;
           }
 
-          this.pressed = true;
+          this.super();
 
           var rect = this.getBoundingClientRect();
           // We want the ink to propagate from the interaction point to the
@@ -160,21 +173,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$.ink.style.left = (e.x - rect.left - inkDiameter / 2) + 'px';
             this.$.ink.style.top = (e.y - rect.top - inkDiameter / 2) + 'px';
           }
-          this.$.ink.spill();
-        },
-
-        upAction: function(e) {
-          if (this.disabled) {
-            return;
-          }
-
-          // wait for tap event to reset ink
-          if (this.insideButton(e.x, e.y)) {
-            return;
-          }
-
-          this.pressed = false;
-          this.waitForSpillCompleted('resetInk');
         }
 
       });
