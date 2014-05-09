@@ -7,8 +7,8 @@
   text-transform: uppercase;
   outline: none;
   border-radius: 3px;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
   cursor: pointer;
 }
 
@@ -50,14 +50,26 @@
   border-radius: 3px;
   background: #c3c3c3;
   -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :host([focused]) #focusBg {
   -webkit-transition: none;
+  transition: none;
   -webkit-animation: focus-fade 0.7s infinite alternate;
+  animation: focus-fade 0.7s infinite alternate;
 }
 
 @-webkit-keyframes focus-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes focus-fade {
   0% {
     opacity: 1;
   }
