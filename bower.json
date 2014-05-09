@@ -4,7 +4,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#master",
     "paper-focusable": "Polymer/paper-focusable#master",
-    "paper-ink": "Polymer/paper-ink#master",
+    "paper-ripple": "Polymer/paper-ripple#master",
     "paper-shadow": "Polymer/paper-shadow#master"
   }
 }

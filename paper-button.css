@@ -16,7 +16,7 @@
   border-radius: 3px;
 }
 
-:host(:hover) {
+:host(.hover:hover) {
   background: #e4e4e4;
 }
 
@@ -24,7 +24,7 @@
   background: #dfdfdf;
 }
 
-:host([raisedButton]:hover) {
+:host([raisedButton].hover:hover) {
   background: #d6d6d6;
 }
 
@@ -66,10 +66,22 @@
   }
 }
 
-#ink {
+#ripple {
   position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: #d1d1d1;
   pointer-events: none;
-  width: 100%;
+}
+
+:host([raisedButton]) #ripple {
+  color: #cecece;
+}
+
+#ripple::shadow canvas {
+  position: relative;
 }
 
 #clip > div {

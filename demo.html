@@ -45,14 +45,18 @@ license that can be found in the LICENSE file.
     paper-button.colored {
       color: #4285f4;
     }
+
     paper-button[raisedButton].colored {
       background: #4285f4;
       color: #fff;
     }
-    paper-button[raisedButton].colored:hover {
+    paper-button[raisedButton].colored.hover:hover {
       background: #3367d6;
     }
-    paper-button[raisedButton].colored:focus:not([pressed])::shadow #clip > #focusBg {
+    paper-button[raisedButton].colored::shadow #ripple {
+      color: #2a56c6;
+    }
+    paper-button[raisedButton].colored::shadow #clip > #focusBg {
       background: #3367d6;
     }
 
@@ -81,11 +85,30 @@ license that can be found in the LICENSE file.
   <section>
     <paper-button raisedButton>button</paper-button>
     <br>
-    <paper-button raisedButton inkColor="#2a56c6" class="colored">colored</paper-button>
+    <paper-button raisedButton class="colored">colored</paper-button>
     <br>
     <paper-button raisedButton disabled>disabled</paper-button>
     <br>
     <div class="label">raised</div>
+  </section>
+
+  <br>
+  <br>
+
+  <section>
+    <paper-button class="hover">button</paper-button>
+    <br>
+    <paper-button class="colored hover">colored</paper-button>
+    <br>
+    <div class="label">flat + hover state</div>
+  </section>
+
+  <section>
+    <paper-button raisedButton class="hover">button</paper-button>
+    <br>
+    <paper-button raisedButton class="colored hover">colored</paper-button>
+    <br>
+    <div class="label">raised + hover state</div>
   </section>
 
   <br>
