@@ -36,8 +36,7 @@
 
 #clip {
   position: relative;
-  padding: 0.5em 1em;
-  border-radius: 3px;
+  border-radius: inherit;
   overflow: hidden;
 }
 
@@ -89,4 +88,13 @@
 #content {
   /* needed to position the ink behind the content */
   position: relative;
+}
+
+#icon {
+  margin: 8px;
+}
+
+#content > span {
+  display: inline-block;
+  margin: 0.5em;
 }

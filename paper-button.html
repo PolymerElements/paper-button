@@ -48,22 +48,32 @@ To style the background, text and hover color, apply the `background` and
 -->
 
 <link href="../polymer/polymer.html" rel="import">
+<link href="../core-icon/core-icon.html" rel="import">
 <link href="../paper-focusable/paper-focusable.html" rel="import">
 <link href="../paper-ripple/paper-ripple.html" rel="import">
 <link href="../paper-shadow/paper-shadow.html" rel="import">
 
-<polymer-element name="paper-button" extends="paper-focusable" attributes="inkColor raisedButton">
+<polymer-element name="paper-button" extends="paper-focusable" attributes="label raisedButton iconSrc icon">
 
   <template>
 
     <link href="paper-button.css" rel="stylesheet">
 
-    <paper-shadow id="shadow" z="{{z}}" animated></paper-shadow>
+    <template if="{{raisedButton}}">
+      <paper-shadow id="shadow" z="{{z}}" animated></paper-shadow>
+    </template>
 
     <div id="clip">
       <div id="focusBg"></div>
       <paper-ripple id="ripple"></paper-ripple>
-      <div id="content"><content></content></div>
+      <div id="content">
+        <template if="{{iconSrc || icon}}">
+          <core-icon id="icon" src="{{iconSrc}}" icon="{{icon}}"></core-icon>
+        </template>
+        <template if="{{label}}">
+          <span>{{label}}</span>
+        </template>
+      </div>
     </div>
 
   </template>
@@ -74,17 +84,55 @@ To style the background, text and hover color, apply the `background` and
       publish: {
 
         /**
+         * The label of the button.
+         *
+         * @attribute label
+         * @type string
+         * @default ''
+         */
+        label: '',
+
+        /**
          * If true, the button will be styled as a "raised" button.
          *
          * @attribute raisedButton
          * @type boolean
          * @default false
          */
-        raisedButton: {value: false, reflect: true}
+        raisedButton: {value: false, reflect: true},
+
+        /**
+         * (optional) The URL of an image for an icon to use in the button.
+         * Should not use `icon` property if you are using this property.
+         *
+         * @attribute iconSrc
+         * @type string
+         * @default ''
+         */
+         iconSrc: {value: ''},
+
+         /**
+          * (optional) Specifies the icon name or index in the set of icons
+          * available in the icon set. If using this property, load the icon
+          * set separately where the icon is used. Should not use `src`
+          * if you are using this property.
+          *
+          * @attribute icon
+          * @type string
+          * @default ''
+          */
+         icon: {value: ''}
 
       },
 
       z: 1,
+
+      attached: function() {
+        if (this.textContent) {
+          console.warn('Using textContent to label the button is deprecated. Use the "label" property instead');
+          this.label = this.textContent;
+        }
+      },
 
       raisedButtonChanged: function() {
         if (this.raisedButton) {
