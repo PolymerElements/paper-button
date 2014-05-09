@@ -42,17 +42,18 @@
 }
 
 #focusBg {
-  -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-:host([focused]) #clip > #focusBg {
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
+  opacity: 0;
   border-radius: 3px;
   background: #c3c3c3;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host([focused]) #focusBg {
   -webkit-transition: none;
   -webkit-animation: focus-fade 0.7s infinite alternate;
 }
@@ -81,10 +82,11 @@
 }
 
 #ripple::shadow canvas {
-  position: relative;
+  top: 0;
+  left: 0;
 }
 
-#clip > div {
+#content {
   /* needed to position the ink behind the content */
   position: relative;
 }
