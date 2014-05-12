@@ -12,10 +12,6 @@
   cursor: pointer;
 }
 
-.paper-shadow-bottom {
-  border-radius: 3px;
-}
-
 :host(.hover:hover) {
   background: #e4e4e4;
 }
@@ -47,7 +43,7 @@
   bottom: 0;
   right: 0;
   opacity: 0;
-  border-radius: 3px;
+  border-radius: inherit;
   background: #c3c3c3;
   -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
