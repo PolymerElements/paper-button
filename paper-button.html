@@ -53,7 +53,8 @@ To style the background, text and hover color, apply the `background` and
 <link href="../paper-ripple/paper-ripple.html" rel="import">
 <link href="../paper-shadow/paper-shadow.html" rel="import">
 
-<polymer-element name="paper-button" extends="paper-focusable" attributes="label raisedButton iconSrc icon">
+<polymer-element name="paper-button" extends="paper-focusable" attributes="label raisedButton iconSrc icon"
+role="button">
 
   <template>
 
@@ -205,6 +206,10 @@ To style the background, text and hover color, apply the `background` and
       downAction: function(e) {
         this.super(e);
         this.lastEvent = e;
+      },
+
+      labelChanged: function() {
+        this.setAttribute('aria-label', this.label);
       }
 
     });
