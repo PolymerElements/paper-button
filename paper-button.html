@@ -152,7 +152,11 @@ role="button">
          * @type boolean
          * @default true
          */
-        fill: true
+        fill: true,
+
+        /* @deprecated */
+        icon: null,
+        iconSrc: null
 
       },
 
@@ -166,6 +170,14 @@ role="button">
         if (this.raisedButton) {
           console.warn('The "raisedButton" property is deprecated.');
         }
+      },
+
+      iconChanged: function() {
+        console.warn('The "icon" property is deprecated.');
+      },
+
+      iconSrcChanged: function() {
+        console.warn('The "iconSrc" property is deprecated.');
       }
 
     });
