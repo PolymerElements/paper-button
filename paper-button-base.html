@@ -13,19 +13,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 `paper-button-base` is the base class for button-like elements with ripple and optional shadow.
 
 @element paper-button-base
-@extends paper-focusable
+@mixins Polymer.CoreFocusable
 @status unstable
 -->
 
 <link href="../polymer/polymer.html" rel="import">
-<link href="../paper-focusable/paper-focusable.html" rel="import">
+<link href="../core-focusable/core-focusable.html" rel="import">
 
-<polymer-element name="paper-button-base" extends="paper-focusable">
+<polymer-element name="paper-button-base">
 
-  <script>
-    Polymer({
+<script>
+
+  (function() {
+
+    var p = {
 
       z: 1,
+
+      eventDelegates: {
+        down: 'downAction'
+      },
 
       activeChanged: function() {
         this.super();
@@ -47,12 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       disabledChanged: function() {
-        this.super();
-        if (this.disabled) {
-          this.setAttribute('aria-disabled', '');
-        } else {
-          this.removeAttribute('aria-disabled');
-        }
+        this._disabledChanged();
         this.adjustZ();
       },
 
@@ -79,7 +81,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       downAction: function(e) {
-        this.super(e);
+        this._downAction();
+
         this.lastEvent = e;
         if (!this.$.ripple) {
           var ripple = document.createElement('paper-ripple');
@@ -98,6 +101,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
 
-    });
-  </script>
+    };
+
+    Polymer.mixin2(p, Polymer.CoreFocusable);
+    Polymer(p);
+
+  })();
+
+</script>
 </polymer-element>
