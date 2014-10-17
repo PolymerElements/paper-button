@@ -122,8 +122,6 @@ role="button">
 
       publish: {
 
-        label: '',
-
         /**
          * If true, the button will be styled with a shadow.
          *
@@ -132,7 +130,6 @@ role="button">
          * @default false
          */
         raised: false,
-        raisedButton: false,
 
         /**
          * By default the ripple emanates from where the user touched the button.
@@ -152,32 +149,8 @@ role="button">
          * @type boolean
          * @default true
          */
-        fill: true,
+        fill: true
 
-        /* @deprecated */
-        icon: null,
-        iconSrc: null
-
-      },
-
-      labelChanged: function() {
-        if (this.label) {
-          console.warn('The "label" property is deprecated.');
-        }
-      },
-
-      raisedButtonChanged: function() {
-        if (this.raisedButton) {
-          console.warn('The "raisedButton" property is deprecated.');
-        }
-      },
-
-      iconChanged: function() {
-        console.warn('The "icon" property is deprecated.');
-      },
-
-      iconSrcChanged: function() {
-        console.warn('The "iconSrc" property is deprecated.');
       }
 
     });
