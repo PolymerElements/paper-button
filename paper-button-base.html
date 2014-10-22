@@ -28,8 +28,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     var p = {
 
-      z: 1,
-
       eventDelegates: {
         down: 'downAction'
       },
@@ -74,12 +72,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       adjustZ: function() {
+        if (!this.$.shadow) {
+          return;
+        }
         if (this.active) {
-          this.z = 2;
+          this.$.shadow.setZ(2);
         } else if (this.disabled) {
-          this.z = 0;
+          this.$.shadow.setZ(0);
         } else {
-          this.z = 1;
+          this.$.shadow.setZ(1);
         }
       },
 

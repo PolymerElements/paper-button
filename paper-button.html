@@ -98,6 +98,10 @@ role="button">
         text-transform: inherit;
       }
 
+      #shadow {
+        border-radius: inherit;
+      }
+
       #ripple {
         pointer-events: none;
         z-index: -1;
@@ -105,8 +109,8 @@ role="button">
 
     </style>
 
-    <template if="{{raisedButton || raised}}">
-      <paper-shadow id="shadow" z="{{z}}" animated></paper-shadow>
+    <template if="{{raised}}">
+      <paper-shadow id="shadow" fit animated></paper-shadow>
     </template>
 
     <!-- this div is needed to position the ripple behind text content -->
