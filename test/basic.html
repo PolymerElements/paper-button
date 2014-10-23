@@ -31,7 +31,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       assert.ok(!b1.shadowRoot.querySelector('paper-shadow'));
       b1.raised = true;
       flush(function() {
-        assert.ok(b1.shadowRoot.querySelector('paper-shadow'));
+        var shadow = b1.shadowRoot.querySelector('paper-shadow');
+        assert.ok(shadow);
+        assert.notEqual(getComputedStyle(shadow.$['shadow-top'])['box-shadow'], 'none');
         done();
       });
     });
