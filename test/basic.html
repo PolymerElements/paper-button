@@ -10,16 +10,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>paper-button tests</title>
+  <title>paper-button basic tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
+
+  <link href="../paper-button.html" rel="import">
+
 </head>
 <body>
+
+  <paper-button id="button1">button</paper-button>
+
   <script>
-    WCT.loadSuites([
-      'basic.html',
-      'a11y.html'
-    ]);
+
+    var b1 = document.getElementById('button1');
+
+    test('can set raised imperatively', function(done) {
+      assert.ok(!b1.shadowRoot.querySelector('paper-shadow'));
+      b1.raised = true;
+      flush(function() {
+        assert.ok(b1.shadowRoot.querySelector('paper-shadow'));
+        done();
+      });
+    });
+
   </script>
+
 </body>
 </html>
