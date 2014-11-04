@@ -73,7 +73,6 @@ role="button">
         position: relative;
         box-sizing: border-box;
         min-width: 5.14em;
-        padding: 0.7em 0.57em;
         margin: 0 0.29em;
         background: transparent;
         text-align: center;
@@ -107,6 +106,22 @@ role="button">
         z-index: -1;
       }
 
+      .button-content {
+        padding: 0.7em 0.57em
+      }
+
+      polyfill-next-selector { content: '.button-content > a'; }
+      ::content > a {
+        height: 100%;
+        padding: 0.7em 0.57em;
+        /* flex */
+        -ms-flex: 1 1 0.000000001px;
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-flex-basis: 0.000000001px;
+        flex-basis: 0.000000001px;
+      }
+
     </style>
 
     <template if="{{raised}}">
@@ -114,7 +129,7 @@ role="button">
     </template>
 
     <!-- this div is needed to position the ripple behind text content -->
-    <div relative>
+    <div class="button-content" relative layout horizontal center-center>
       <content></content>
       {{label}}
     </div>
