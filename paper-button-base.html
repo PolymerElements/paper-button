@@ -70,7 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           return;
         }
 
-        if (this.$.ripple) {
+        if (this.$.ripple && !this.hasAttribute('noink')) {
           if (this.pressed) {
             this.$.ripple.downAction(this.lastEvent);
           } else {

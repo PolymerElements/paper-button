@@ -15,6 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script src="../../webcomponentsjs/webcomponents.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../polymer-gestures/test/js/fake.js"></script>
 
   <link href="../paper-button.html" rel="import">
 
@@ -23,7 +24,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <paper-button id="button1">button</paper-button>
 
+  <paper-button id="button2">button</paper-button>
+
+  <paper-button id="disabled" disabled>disabled</paper-button>
+
   <script>
+
+    var fake = new Fake();
 
     var b1 = document.getElementById('button1');
 
@@ -36,6 +43,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         assert.notEqual(getComputedStyle(shadow.$['shadow-top'])['box-shadow'], 'none');
         done();
       });
+    });
+
+    test('can set noink dynamically', function(done) {
+      var button = document.getElementById('button2');
+      button.lastEvent = {x: 100, y: 100};
+      button.$.ripple = {
+        downAction: function() {
+          assert.ok(false);
+        },
+        upAction: function() {
+          assert.ok(false);
+        }
+      };
+      button.setAttribute('noink', '');
+      fake.downOnNode(button);
+      fake.upOnNode(button);
+      // would throw if it tries to ripple
+      setTimeout(done, 10);
+    });
+
+    suite('a11y', function() {
+
+      test('aria role is a button', function() {
+        assert.strictEqual('button', b1.getAttribute('role'));
+      });
+
+      test('aria-disabled is set', function(done) {
+        var button = document.getElementById('disabled');
+        assert.ok(button.hasAttribute('aria-disabled'));
+        button.removeAttribute('disabled');
+        flush(function() {
+          assert.ok(!button.hasAttribute('aria-disabled'));
+          done();
+        });
+      });
+
     });
 
   </script>
