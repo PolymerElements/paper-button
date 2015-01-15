@@ -79,6 +79,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
       });
 
+      test('space triggers the button', function() {
+        var ev = new CustomEvent('keydown', {detail: {key: 'space'}});
+        var sawClick = false;
+        function clickListener() {
+          sawClick = true;
+        }
+        b1.addEventListener('click', clickListener);
+        b1.dispatchEvent(ev);
+        assert.ok(sawClick);
+        b1.removeEventListener(clickListener);
+      });
+
+      test('enter triggers the button', function() {
+        var ev = new CustomEvent('keydown', {detail: {key: 'enter'}});
+        var sawClick = false;
+        function clickListener() {
+          sawClick = true;
+        }
+        b1.addEventListener('click', clickListener);
+        b1.dispatchEvent(ev);
+        assert.ok(sawClick);
+        b1.removeEventListener(clickListener);
+      });
+
     });
 
   </script>

@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "polymer": "Polymer/polymer#master",
+    "core-a11y-keys": "Polymer/core-a11y-keys#master",
     "core-focusable": "Polymer/core-focusable#master",
     "core-icon": "Polymer/core-icon#master",
     "paper-ripple": "Polymer/paper-ripple#master",

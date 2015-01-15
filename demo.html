@@ -60,10 +60,16 @@ license that can be found in the LICENSE file.
       color: #4285f4;
     }
 
+    paper-button:focus {
+      border: 2px solid blue;
+    }
+
   </style>
 </head>
-<body unresolved onclick="clickAction(event);">
+<body unresolved>
 
+  <template is="auto-binding">
+    <div id="clicker" on-tap="{{clickAction}}">
   <section>
 
     <div>Flat buttons</div>
@@ -129,6 +135,8 @@ license that can be found in the LICENSE file.
     <paper-button class="blue-ripple">custom ripple</paper-button>
 
   </section>
+</div>
+</template>
 
   <script>
 
@@ -142,6 +150,10 @@ license that can be found in the LICENSE file.
         }
       }
     }
+
+    addEventListener('template-bound', function(e) {
+      e.target.clickAction = clickAction;
+    });
 
   </script>
 
