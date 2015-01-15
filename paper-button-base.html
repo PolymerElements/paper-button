@@ -81,6 +81,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.adjustZ();
       },
 
+      focusedChanged: function() {
+        this.adjustZ();
+      },
+
       disabledChanged: function() {
         this._disabledChanged();
         this.adjustZ();
@@ -106,6 +110,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.$.shadow.setZ(2);
         } else if (this.disabled) {
           this.$.shadow.setZ(0);
+        } else if (this.focused) {
+          this.$.shadow.setZ(3);
         } else {
           this.$.shadow.setZ(1);
         }
