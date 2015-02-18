@@ -1,0 +1,174 @@
+<!--
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE
+The complete set of authors may be found at http://polymer.github.io/AUTHORS
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<script>
+  (function() {
+    var FocusSource = {
+      MOUSE: 'mouse',
+      KEYBOARD: 'keyboard',
+      NONE: 'none'
+    };
+
+    Polymer({
+      is: 'paper-button-state',
+
+      properties: {
+        elevation: {
+          type: Number,
+          notify: true,
+          computed: 'computeElevation(focused, focusSource, active, disabled, raised)'
+        },
+
+        toggle: {
+          type: Boolean,
+          readOnly: true,
+          notify: true,
+          value: false
+        },
+
+        raised: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          observer: 'onRaisedChanged'
+        },
+
+        focusSource: {
+          type: String,
+          readOnly: true,
+          notify: true,
+          value: function() {
+            this._setFocusSource(FocusSource.NONE);
+          }
+        },
+
+        active: {
+          type: Boolean,
+          value: false,
+          observer: 'onActiveChanged'
+        },
+
+        focused: {
+          type: Boolean,
+          value: false,
+          observer: 'onFocusedChanged'
+        },
+
+        disabled: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      listeners: {
+        click: 'onClick',
+        focus: 'onFocus',
+        blur: 'onBlur'
+      },
+
+      get target() {
+        return this.host || this.parentNode;
+      },
+
+      configure: function() {
+        return {
+          _focusSource: FocusSource.NONE,
+          _attributeObserver: new MutationObserver(
+            this.onTargetAttributesChanged.bind(this)
+          )
+        };
+      },
+
+      attached: function() {
+        if (!this.target.hasAttribute('role')) {
+          this.target.setAttribute('role', 'button');
+        }
+
+        this._attributeObserver.observe(this.target, {
+          attributes: true,
+          attributeFilter: [
+            'toggle',
+            'raised'
+          ]
+        });
+
+        this.onTargetAttributesChanged();
+      },
+
+      detached: function() {
+        if (this.target.getAttribute('role') === 'button') {
+          this.target.removeAttribute('role');
+        }
+
+        this._attributeObserver.disconnect();
+      },
+
+      computeElevation: function(focused, focusSource, active, disabled, raised) {
+        if (disabled || !raised) {
+          return 0;
+        }
+
+        if (active || focusSource === FocusSource.MOUSE) {
+          return 2;
+        }
+
+        if (focused) {
+          return 3;
+        }
+
+        return 1;
+      },
+
+      onActiveChanged: function(active) {
+        if (active) {
+          this.target.setAttribute('aria-pressed', 'true');
+        } else {
+          this.target.removeAttribute('aria-pressed');
+        }
+      },
+
+      onFocusedChanged: function(focused) {
+        if (!focused) {
+          this._setFocusSource(FocusSource.NONE);
+          return;
+        }
+
+        // TODO(cdata): Add better focus source detection when PolymerGestures
+        // equivalent lands in 0.8+.
+        if (this.active || this.toggle) {
+          this._setFocusSource(FocusSource.MOUSE);
+        } else {
+          this._setFocusSource(FocusSource.KEYBOARD);
+        }
+      },
+
+      onRaisedChanged: function(raised, oldRaised) {
+        if (oldRaised === undefined &&
+            this.target.hasAttribute('raised')) {
+          console.log('tossing out raised with', raised);
+          return;
+        }
+
+        if (raised) {
+          if (!this.target.hasAttribute('raised')) {
+            this.target.setAttribute('raised', '');
+          }
+        } else  {
+          this.target.removeAttribute('raised');
+        }
+      },
+
+      onTargetAttributesChanged: function() {
+        this._setToggle(this.target.hasAttribute('toggle'));
+        this.raised = this.target.hasAttribute('raised');
+      }
+    });
+  })();
+</script>
