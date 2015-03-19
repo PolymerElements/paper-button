@@ -33,11 +33,7 @@ paper-card {
   border-radius: inherit;
 }
 
-/*:host(:not([raised])) paper-card {*/
-  /*box-shadow: none !important;*/
-/*}*/
-
-::content * {
+.content > ::content * {
   text-transform: inherit;
 }
 

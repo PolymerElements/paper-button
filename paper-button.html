@@ -66,22 +66,21 @@ The opacity of the ripple is not customizable via CSS.
   <link rel="import" type="css" href="./paper-button.css">
   <template>
     <!-- Manage disabled -->
-    <core-disabled-state disabled="{{disabled}}">
-      </core-disabled-state>
+    <core-disabled-state disabled="{{disabled}}"></core-disabled-state>
 
     <!-- Manage focused -->
     <core-focused-state focused="{{focused}}" disabled="[[disabled]]">
-      </core-focused-state>
+    </core-focused-state>
 
     <!-- Manage active -->
     <core-active-state active="{{active}}" disabled="[[disabled]]" toggle="[[toggle]]">
-      </core-active-state>
+    </core-active-state>
 
     <!-- Manage elevation / toggle / raised / aria-pressed -->
     <paper-button-state
       elevation="{{elevation}}" toggle="{{toggle}}" raised="{{raised}}"
       active="[[active]]" focused="[[focused]]" disabled="[[disabled]]">
-      </paper-button-state>
+    </paper-button-state>
 
     <!-- Enable rippliness -->
     <paper-ripple></paper-ripple>
