@@ -95,6 +95,80 @@ The opacity of the ripple is not customizable via CSS.
 </dom-module>
 <script>
   Polymer({
-    is: 'paper-button'
+    is: 'paper-button',
+
+    properties: {
+
+      /**
+       * If true, the user cannot interact with this button.
+       *
+       * @attribute disabled
+       * @type boolean
+       * @default false
+       */
+      disabled: {
+        type: Boolean
+      },
+
+      /**
+       * If true, the button is currently active either because the
+       * user is touching it, or the button is a toggle
+       * and is currently in the active state.
+       *
+       * @attribute active
+       * @type boolean
+       * @default false
+       */
+      active: {
+        type: Boolean
+      },
+
+      /**
+       * If true, the button currently has focus.
+       *
+       * @attribute focused
+       * @type boolean
+       * @default false
+       */
+      focused: {
+        type: Boolean
+      },
+
+      /**
+       * If true, the button toggles the active state with each tap.
+       * Otherwise, the button becomes active when the user is holding
+       * it down.
+       *
+       * @attribute toggle
+       * @type boolean
+       * @default false
+       */
+      toggle: {
+        type: Boolean
+      },
+
+      /**
+       * If true, the button should be styled with a shadow.
+       *
+       * @attribute raised
+       * @type boolean
+       * @default false
+       */
+      raised: {
+        type: Boolean
+      },
+
+      /**
+       * The elevation of the button, represented as 2dp. Note that this
+       * is a computed property and should be treated as read-only.
+       *
+       * @attribute elevation
+       * @type boolean
+       * @default 0
+       */
+      elevation: {
+        type: Number
+      }
+    }
   });
 </script>
