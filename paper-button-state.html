@@ -103,11 +103,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
       },
 
-      attached: function() {
+      ready: function() {
         if (!this.target.hasAttribute('role')) {
           this.target.setAttribute('role', 'button');
         }
 
+        this.onTargetAttributesChanged();
+      },
+
+      attached: function() {
         this._attributeObserver.observe(this.target, {
           attributes: true,
           attributeFilter: [
@@ -115,15 +119,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             'raised'
           ]
         });
-
-        this.onTargetAttributesChanged();
       },
 
       detached: function() {
-        if (this.target.getAttribute('role') === 'button') {
-          this.target.removeAttribute('role');
-        }
-
         this._attributeObserver.disconnect();
       },
 
@@ -169,7 +167,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       onRaisedChanged: function(raised, oldRaised) {
         if (oldRaised === undefined &&
             this.target.hasAttribute('raised')) {
-          console.log('tossing out raised with', raised);
           return;
         }
 
