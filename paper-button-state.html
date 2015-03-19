@@ -20,12 +20,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'paper-button-state',
 
       properties: {
+        /**
+         * The elevation of the button, represented as 2dp. Note that this
+         * is a computed property and should be treated as read-only.
+         *
+         * @attribute elevation
+         * @type boolean
+         * @default 0
+         */
         elevation: {
           type: Number,
           notify: true,
           computed: 'computeElevation(focused, focusSource, active, disabled, raised)'
         },
 
+        /**
+         * If true, the button will use toggle conventions for activation and
+         * deactivation.
+         *
+         * @attribute toggle
+         * @type boolean
+         * @default false
+         */
         toggle: {
           type: Boolean,
           readOnly: true,
@@ -33,6 +49,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: false
         },
 
+        /**
+         * If true, the button should be styled with a shadow.
+         *
+         * @attribute raised
+         * @type boolean
+         * @default false
+         */
         raised: {
           type: Boolean,
           value: false,
@@ -65,12 +88,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Boolean,
           value: false
         }
-      },
-
-      listeners: {
-        click: 'onClick',
-        focus: 'onFocus',
-        blur: 'onBlur'
       },
 
       get target() {
