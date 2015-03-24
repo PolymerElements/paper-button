@@ -2,14 +2,16 @@
   "name": "paper-button",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#master",
-    "core-a11y-keys": "Polymer/core-a11y-keys#master",
-    "core-focusable": "Polymer/core-focusable#master",
-    "core-icon": "Polymer/core-icon#master",
-    "paper-ripple": "Polymer/paper-ripple#master",
-    "paper-shadow": "Polymer/paper-shadow#master"
+    "polymer": "Polymer/polymer#0.8-preview",
+    "paper-ripple": "Polymer/paper-ripple#0.8-preview",
+    "paper-card": "Polymer/paper-card#master",
+    "layout": "Polymer/layout#master",
+    "core-focusable": "polymer/core-focusable#0.8-preview"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#^1.1.4"
+    "web-component-tester": "~2.2.3",
+    "test-fixture": "polymer/test-fixture#~0.1.0",
+    "font-roboto": "polymer/font-roboto#~0.5.5",
+    "core-icon": "Polymer/core-icon#0.8-preview"
   }
 }
