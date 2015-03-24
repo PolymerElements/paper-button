@@ -67,14 +67,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         button.addEventListener('click', function() {
           done();
         });
-        pressSpace(button);
+        MockInteractions.pressSpace(button);
       });
 
       test('can be triggered with enter', function(done) {
         button.addEventListener('click', function() {
           done();
         });
-        pressEnter(button);
+        MockInteractions.pressEnter(button);
       });
     });
   </script>
