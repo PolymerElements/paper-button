@@ -8,7 +8,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <!--
-@group Paper Elements
 
 Material Design: <a href="http://www.google.com/design/spec/components/buttons.html">Buttons</a>
 
@@ -50,111 +49,126 @@ customize the color using this selector:
 
 The opacity of the ripple is not customizable via CSS.
 
-@element paper-button
-@status unstable
 -->
 
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-ripple/paper-ripple.html">
-<link rel="import" href="../core-focusable/core-disabled-state.html">
-<link rel="import" href="../core-focusable/core-focused-state.html">
-<link rel="import" href="../core-focusable/core-active-state.html">
-<link rel="import" href="./paper-button-state.html">
+
+<link rel="import" href="../iron-state-behaviors/iron-button-state.html">
 
 <dom-module id="paper-button">
-  <link rel="import" type="css" href="./paper-button.css">
+
+  <style>
+
+    :host {
+      display: inline-block;
+      position: relative;
+      box-sizing: border-box;
+      min-width: 5.14em;
+      margin: 0 0.29em;
+      background: transparent;
+      text-align: center;
+      font: inherit;
+      text-transform: uppercase;
+      outline: none;
+      border-radius: 3px;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      z-index: 0;
+    }
+
+    :host([disabled]) {
+      background: #eaeaea;
+      color: #a8a8a8;
+      cursor: auto;
+      pointer-events: none;
+    }
+
+    :host([noink]) paper-ripple {
+      display: none;
+    }
+
+    paper-card {
+      border-radius: inherit;
+    }
+
+    .content > ::content * {
+      text-transform: inherit;
+    }
+
+    .content {
+      padding: 0.7em 0.57em
+    }
+  </style>
+
   <template>
-    <template is="core-disabled-state" disabled="{{disabled}}"></template>
-    <template is="core-focused-state" focused="{{focused}}" disabled="[[disabled]]"></template>
-    <template is="core-active-state" active="{{active}}" disabled="[[disabled]]" toggle="[[toggle]]"></template>
-    <template is="paper-button-state"
-      elevation="{{elevation}}" toggle="{{toggle}}" raised="{{raised}}"
-      active="[[active]]" focused="[[focused]]" disabled="[[disabled]]"></template>
 
     <paper-ripple></paper-ripple>
-    <paper-card class="content" elevation="[[elevation]]" animated>
+
+    <paper-card class="content" elevation="[[_elevation]]" animated>
       <content></content>
     </paper-card>
+
   </template>
-</dom-module>
-<script>
-  Polymer({
-    is: 'paper-button',
 
-    properties: {
+  <script>
 
-      /**
-       * If true, the user cannot interact with this button.
-       *
-       * @attribute disabled
-       * @type boolean
-       * @default false
-       */
-      disabled: {
-        type: Boolean
+    Polymer({
+
+      behaviors: [
+        Polymer.IronControlStateBehavior,
+        Polymer.IronButtonStateBehavior
+      ],
+
+      properties: {
+
+        /**
+         * If true, the button should be styled with a shadow.
+         *
+         * @attribute raised
+         * @type boolean
+         * @default false
+         */
+        raised: {
+          type: Boolean,
+          reflect: true,
+          value: false,
+          notify: true
+        }
+
       },
 
-      /**
-       * If true, the button is currently active either because the
-       * user is touching it, or the button is a toggle
-       * and is currently in the active state.
-       *
-       * @attribute active
-       * @type boolean
-       * @default false
-       */
-      active: {
-        type: Boolean
+      ready: function() {
+        if (!this.hasAttribute('role')) {
+          this.setAttribute('role', 'button');
+        }
       },
 
-      /**
-       * If true, the button currently has focus.
-       *
-       * @attribute focused
-       * @type boolean
-       * @default false
-       */
-      focused: {
-        type: Boolean
+      _buttonStateChanged: function() {
+        this.toggleAttribute('aria-pressed', this.active);
+        this._elevation = this._computeElevation();
       },
 
-      /**
-       * If true, the button toggles the active state with each tap.
-       * Otherwise, the button becomes active when the user is holding
-       * it down.
-       *
-       * @attribute toggle
-       * @type boolean
-       * @default false
-       */
-      toggle: {
-        type: Boolean
-      },
-
-      /**
-       * If true, the button should be styled with a shadow.
-       *
-       * @attribute raised
-       * @type boolean
-       * @default false
-       */
-      raised: {
-        type: Boolean
-      },
-
-      /**
-       * The elevation of the button, represented as 2dp. Note that this
-       * is a computed property and should be treated as read-only.
-       *
-       * @attribute elevation
-       * @type number
-       * @default 0
-       */
-      elevation: {
-        type: Number,
-        value: 0
+      _computeElevation: function() {
+        if (this.disabled || !this.raised) {
+          return 0;
+        }
+        if (this.active) {
+          return 2;
+        }
+        if (this.focused) {
+          return 3;
+        }
+        return 1;
       }
-    }
-  });
-</script>
+
+    });
+
+  </script>
+
+</dom-module>
+
