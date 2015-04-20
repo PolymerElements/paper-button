@@ -5,7 +5,7 @@
     "polymer": "Polymer/polymer#0.8-preview",
     "paper-ripple": "PolymerElements/paper-ripple#master",
     "paper-card": "PolymerElements/paper-card#master",
-    "iron-state-behaviors": "PolymerElements/iron-state-behaviors#master"
+    "paper-behaviors": "PolymerElements/paper-behaviors#master"
   },
   "devDependencies": {
     "web-component-tester": "~2.2.3",
