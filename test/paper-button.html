@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
   <script src="../../test-fixture/test-fixture-mocha.js"></script>
-  <script src="../../core-focusable/test/test-helpers.js"></script>
+  <script src="../../iron-state-behaviors/test/test-helpers.js"></script>
 
   <link rel="import" href="../paper-button.html">
   <link rel="import" href="../../test-fixture/test-fixture.html">
@@ -45,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         Polymer.Base.async(function() {
           try {
-            expect(button.elevation).to.be.eql(1);
+            expect(button._elevation).to.be.eql(1);
             done();
           } catch (e) {
             done(e);

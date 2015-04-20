@@ -134,9 +134,9 @@ The opacity of the ripple is not customizable via CSS.
          */
         raised: {
           type: Boolean,
-          reflect: true,
+          reflectToAttribute: true,
           value: false,
-          notify: true
+          observer: '_buttonStateChanged'
         }
 
       },
