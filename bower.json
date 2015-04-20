@@ -10,8 +10,7 @@
   "devDependencies": {
     "web-component-tester": "~2.2.3",
     "test-fixture": "polymer/test-fixture#~0.1.0",
-    "iron-component-page": "polymerelements/iron-component-page#master",
-    "font-roboto": "polymer/font-roboto#~0.5.5",
+    "iron-component-page": "polymerElements/iron-component-page#master",
     "iron-icon": "PolymerElements/iron-icon#master"
   }
 }
