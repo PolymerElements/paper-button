@@ -8,6 +8,11 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
 -->
 
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-behaviors/paper-button-behavior.html">
+
 <!--
 
 Material Design: <a href="http://www.google.com/design/spec/components/buttons.html">Buttons</a>
@@ -52,11 +57,6 @@ The opacity of the ripple is not customizable via CSS.
 
 -->
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-material/paper-material.html">
-<link rel="import" href="../paper-ripple/paper-ripple.html">
-
-<link rel="import" href="../paper-behaviors/paper-button-behavior.html">
 
 <dom-module id="paper-button">
 
@@ -80,6 +80,8 @@ The opacity of the ripple is not customizable via CSS.
       user-select: none;
       cursor: pointer;
       z-index: 0;
+
+      @apply(--paper-button);
     }
 
     :host([disabled]) {
@@ -87,6 +89,8 @@ The opacity of the ripple is not customizable via CSS.
       color: #a8a8a8;
       cursor: auto;
       pointer-events: none;
+
+      @apply(--paper-button-disabled);
     }
 
     :host([noink]) paper-ripple {
