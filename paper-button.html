@@ -35,7 +35,7 @@ create a button with an icon and some text:
       custom button content
     </paper-button>
 
-## Styling
+### Styling
 
 Style the button with CSS as you would a normal DOM element.
 
@@ -54,6 +54,14 @@ customize the color using this selector:
     }
 
 The opacity of the ripple is not customizable via CSS.
+
+The following custom properties and mixins are also available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-button-flat-focus-color` | Background color of a focused flat button | `--paper-grey-200`
+`--paper-button` | Mixin applied to the button | `{}`
+`--paper-button-disabled` | Mixin applied to the disabled button | `{}`
 
 -->
 
@@ -81,6 +89,10 @@ The opacity of the ripple is not customizable via CSS.
       z-index: 0;
 
       @apply(--paper-button);
+    }
+
+    .flat-focus {
+      background-color: var(--paper-button-flat-focus-color, --paper-grey-200);
     }
 
     :host([disabled]) {
@@ -113,7 +125,7 @@ The opacity of the ripple is not customizable via CSS.
 
     <paper-ripple></paper-ripple>
 
-    <paper-material class="content" elevation="[[_elevation]]" animated>
+    <paper-material id="material" class="content" elevation="[[_elevation]]" animated>
       <content></content>
     </paper-material>
 
@@ -153,9 +165,14 @@ The opacity of the ripple is not customizable via CSS.
 
     _buttonStateChanged: function() {
       this._calculateElevation();
+
+      // By default, the behavior doesn't set an elevation for non-raised
+      // buttons, so we have to manually do something better to indicate focus.
+      var needsSpecialFocus = this._elevation == 0 && this.focused &&
+          !this.active && !this.pressed;
+      this.$.material.toggleClass('flat-focus', needsSpecialFocus);
     }
 
   });
 
 </script>
-
