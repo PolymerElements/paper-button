@@ -91,7 +91,7 @@ Custom property | Description | Default
       @apply(--paper-button);
     }
 
-    .focus {
+    .keyboard-focus {
       font-weight: bold;
     }
 
@@ -163,20 +163,16 @@ Custom property | Description | Default
       }
     },
 
-    observers: [
-      `_focusedChanged(focused)`
-    ],
-
     _buttonStateChanged: function() {
       this._calculateElevation();
     },
 
     _computeContentClass(receivedFocusFromKeyboard) {
-      var cls = 'content ';
+      var className = 'content ';
       if (receivedFocusFromKeyboard) {
-        cls += ' focus';
+        className += ' keyboard-focus';
       }
-      return cls;
+      return className;
     }
   });
 
