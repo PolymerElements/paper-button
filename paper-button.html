@@ -91,8 +91,8 @@ Custom property | Description | Default
       @apply(--paper-button);
     }
 
-    .flat-focus {
-      background-color: var(--paper-button-flat-focus-color, --paper-grey-200);
+    .focus {
+      font-weight: bold;
     }
 
     :host([disabled]) {
@@ -125,7 +125,7 @@ Custom property | Description | Default
 
     <paper-ripple></paper-ripple>
 
-    <paper-material id="material" class="content" elevation="[[_elevation]]" animated>
+    <paper-material class$="[[_computeContentClass(receivedFocusFromKeyboard)]]" elevation="[[_elevation]]" animated>
       <content></content>
     </paper-material>
 
@@ -163,16 +163,21 @@ Custom property | Description | Default
       }
     },
 
+    observers: [
+      `_focusedChanged(focused)`
+    ],
+
     _buttonStateChanged: function() {
       this._calculateElevation();
+    },
 
-      // By default, the behavior doesn't set an elevation for non-raised
-      // buttons, so we have to manually do something better to indicate focus.
-      var needsSpecialFocus = this._elevation == 0 && this.focused &&
-          !this.active && !this.pressed;
-      this.$.material.toggleClass('flat-focus', needsSpecialFocus);
+    _computeContentClass(receivedFocusFromKeyboard) {
+      var cls = 'content ';
+      if (receivedFocusFromKeyboard) {
+        cls += ' focus';
+      }
+      return cls;
     }
-
   });
 
 </script>
