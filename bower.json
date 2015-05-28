@@ -18,7 +18,7 @@
     "type": "git",
     "url": "git://github.com/PolymerElements/paper-button"
   },
-  "license": "MIT",
+  "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/paper-button",
   "dependencies": {
     "paper-ripple": "polymerelements/paper-ripple#^0.9.0",
