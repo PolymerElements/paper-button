@@ -120,6 +120,12 @@ Custom property | Description | Default
     .content {
       padding: 0.7em 0.57em
     }
+    
+    /* preload the font used by `.keyboard-focus` */
+    ::after {
+      font-weight: bold;
+      content: "";
+    }
   </style>
 
   <template>
