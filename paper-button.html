@@ -81,6 +81,7 @@ Custom property | Description | Default
       box-sizing: border-box;
       min-width: 5.14em;
       margin: 0 0.29em;
+      padding: 0.7em 0.57em;
       background: transparent;
       text-align: center;
       font: inherit;
@@ -122,9 +123,6 @@ Custom property | Description | Default
       text-transform: inherit;
     }
 
-    .content {
-      padding: 0.7em 0.57em
-    }
   </style>
 
   <template>
@@ -171,7 +169,7 @@ Custom property | Description | Default
     },
 
     _computeContentClass: function(receivedFocusFromKeyboard) {
-      var className = 'content ';
+      var className = 'content fit ';
       if (receivedFocusFromKeyboard) {
         className += ' keyboard-focus';
       }
