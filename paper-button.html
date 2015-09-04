@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../paper-material/paper-material.html">
 <link rel="import" href="../paper-ripple/paper-ripple.html">
 <link rel="import" href="../paper-behaviors/paper-button-behavior.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 
 <!--
 
@@ -93,6 +94,7 @@ Custom property | Description | Default
         user-select: none;
         cursor: pointer;
         z-index: 0;
+        padding: 0.7em 0.57em;
 
         @apply(--paper-button);
       }
@@ -116,22 +118,19 @@ Custom property | Description | Default
 
       paper-material {
         border-radius: inherit;
+        @apply(--layout-fit);
       }
 
       .content > ::content * {
         text-transform: inherit;
       }
-
-      .content {
-        padding: 0.7em 0.57em
-      }
     </style>
 
     <paper-ripple></paper-ripple>
 
-    <paper-material class$="[[_computeContentClass(receivedFocusFromKeyboard)]]" elevation="[[_elevation]]" animated>
-      <content></content>
-    </paper-material>
+    <paper-material class$="[[_computeContentClass(receivedFocusFromKeyboard)]]" elevation="[[_elevation]]" animated></paper-material>
+
+    <content></content>
 
   </template>
 </dom-module>
