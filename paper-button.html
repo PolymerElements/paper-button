@@ -76,11 +76,10 @@ Custom property | Description | Default
 -->
 
 <dom-module id="paper-button">
-  <template strip-whitespace>
-
-    <style include="paper-material">
+  <template strip-whitespace><style include="paper-material">
       :host {
         display: inline-block;
+        border: none;
         position: relative;
         box-sizing: border-box;
         min-width: 5.14em;
@@ -132,18 +131,14 @@ Custom property | Description | Default
       :host > ::content * {
         text-transform: inherit;
       }
-    </style>
-    <content></content>
-  </template>
+    </style><content></content></template>
 </dom-module>
 
 <script>
   Polymer({
     is: 'paper-button',
 
-    behaviors: [
-      Polymer.PaperButtonBehavior
-    ],
+    extends: 'button',
 
     properties: {
       /**
@@ -154,23 +149,59 @@ Custom property | Description | Default
         reflectToAttribute: true,
         value: false,
         observer: '_calculateElevation'
+      },
+
+      elevation: {
+        type: Number,
+        reflectToAttribute: true
       }
+
+    },
+
+    hostAttributes: {
+      animated: true
+    },
+
+    listeners: {
+      down: '_downAction'
     },
 
     _calculateElevation: function() {
       if (!this.raised) {
         this.elevation = 0;
       } else {
-        Polymer.PaperButtonBehaviorImpl._calculateElevation.apply(this);
+        var e = 1;
+        if (this.disabled) {
+          e = 0;
+        } else if (this.active || this.pressed) {
+          e = 4;
+        } else if (this.receivedFocusFromKeyboard) {
+          e = 3;
+        }
+        this.elevation = e;
       }
     },
 
-    _computeContentClass: function(receivedFocusFromKeyboard) {
-      var className = 'content ';
-      if (receivedFocusFromKeyboard) {
-        className += ' keyboard-focus';
+    listeners: {
+      down: '_downAction'
+    },
+
+    _downAction: function(event) {
+      if (!this._ripple) {
+        this._makeRipple(event);
       }
-      return className;
+    },
+
+    _makeRipple: function(triggeringEvent) {
+      if (!this._ripple) {
+        this._ripple = document.createElement('paper-ripple');
+        Polymer.dom(this.root).appendChild(this._ripple);
+        if (triggeringEvent) {
+          Polymer.dom.flush();
+          this._ripple.downAction(triggeringEvent);
+        }
+      }
     }
+
   });
 </script>
