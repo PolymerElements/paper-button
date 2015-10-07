@@ -106,7 +106,7 @@ Custom property | Description | Default
         @apply(--paper-button-raised-keyboard-focus);
       }
 
-      :host(:not([raised].keyboard-focus)) {
+      :host(:not([raised]).keyboard-focus) {
         font-weight: bold;
         @apply(--paper-button-flat-keyboard-focus);
       }
@@ -118,10 +118,6 @@ Custom property | Description | Default
         pointer-events: none;
 
         @apply(--paper-button-disabled);
-      }
-
-      :host([noink]) paper-ripple {
-        display: none;
       }
 
       paper-ripple {
@@ -162,14 +158,6 @@ Custom property | Description | Default
       } else {
         Polymer.PaperButtonBehaviorImpl._calculateElevation.apply(this);
       }
-    },
-
-    _computeContentClass: function(receivedFocusFromKeyboard) {
-      var className = 'content ';
-      if (receivedFocusFromKeyboard) {
-        className += ' keyboard-focus';
-      }
-      return className;
     }
   });
 </script>
