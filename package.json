@@ -1,0 +1,10 @@
+{
+  "name": "paper-button",
+  "scripts": {
+    "drool": "node test/leaks.js"
+  },
+  "dependencies": {
+    "drool": "^0.2.2",
+    "polymer-drool": "^0.1.0"
+  }
+}
