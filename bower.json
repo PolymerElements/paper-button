@@ -36,5 +36,6 @@
     "iron-icons": "polymerelements/iron-icons#^1.0.0",
     "iron-test-helpers": "polymerelements/iron-test-helpers#^1.0.0",
     "paper-styles": "polymerelements/paper-styles#^1.0.0"
-  }
+  },
+  "ignore": []
 }
