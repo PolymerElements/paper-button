@@ -97,17 +97,18 @@ Custom property | Description | Default
         cursor: pointer;
         z-index: 0;
         padding: 0.7em 0.57em;
-
         @apply(--paper-button);
       }
 
       :host([raised].keyboard-focus) {
         font-weight: bold;
+        letter-spacing: -0.1px;
         @apply(--paper-button-raised-keyboard-focus);
       }
 
       :host(:not([raised]).keyboard-focus) {
         font-weight: bold;
+        letter-spacing: -0.1px;
         @apply(--paper-button-flat-keyboard-focus);
       }
 
