@@ -40,9 +40,11 @@ create a button with an icon and some text:
       custom button content
     </paper-button>
 
-To use `paper-button` as a link, wrap it in an anchor tag:
+To use `paper-button` as a link, wrap it in an anchor tag. Since `paper-button` will already
+receive focus, you may want to prevent the anchor tag from receiving focus as well by setting
+its tabindex to -1.
 
-    <a href="https://www.polymer-project.org/">
+    <a href="https://www.polymer-project.org/" tabindex="-1">
       <paper-button raised>Polymer Project</paper-button>
     </a>
 
