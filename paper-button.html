@@ -110,6 +110,10 @@ Custom property | Description | Default
         @apply(--paper-button);
       }
 
+      :host([disabled]) {
+        display: none !important;
+      }
+
       :host([raised].keyboard-focus) {
         font-weight: bold;
         @apply(--paper-button-raised-keyboard-focus);
