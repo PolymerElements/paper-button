@@ -20,12 +20,14 @@ Example:
     <link rel="import" href="paper-button.html">
     <link rel="import" href="../paper-styles/color.html">
     <style is="custom-style">
+      #container {
+        display: flex;
+      }
       paper-button {
         font-family: 'Roboto', 'Noto', sans-serif;
         font-weight: normal;
         font-size: 14px;
         -webkit-font-smoothing: antialiased;
-    
       }
       paper-button.pink {
         color: var(--paper-pink-a200);
@@ -56,7 +58,9 @@ Example:
         color: white;
       }
     </style>
-    <next-code-block></next-code-block>
+    <div id="container">
+      <next-code-block></next-code-block>
+    </div>
   </template>
 </custom-element-demo>
 ```
