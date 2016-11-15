@@ -84,7 +84,8 @@ Custom property | Description | Default
 <dom-module id="paper-button">
   <template strip-whitespace>
     <style include="paper-material">
-      :host {
+      /* Need to specify the same specificity as the styles imported from paper-material. */
+      :host, :host(.paper-material) {
         @apply --layout-inline;
         @apply --layout-center-center;
         position: relative;
