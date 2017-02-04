@@ -1,6 +1,6 @@
 {
   "name": "paper-button",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "main": "index.js",
   "repository": "https://github.com/PolymerElements/paper-button.git",
