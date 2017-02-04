@@ -1,0 +1,9 @@
+{
+  "name": "paper-button",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "repository": "https://github.com/PolymerElements/paper-button.git",
+  "author": "Justin Fagnani <justinfagnani@google.com>",
+  "license": "MIT"
+}
