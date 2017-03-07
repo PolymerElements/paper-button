@@ -21,7 +21,7 @@
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/paper-button",
   "dependencies": {
-    "polymer": "Polymer/polymer#2.0-preview",
+    "polymer": "Polymer/polymer#^2.0.0-rc.1",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0-preview",
     "paper-behaviors": "PolymerElements/paper-behaviors#2.0-preview",
     "paper-styles": "PolymerElements/paper-styles#2.0-preview"
