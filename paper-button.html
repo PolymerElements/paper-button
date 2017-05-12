@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-behaviors/paper-button-behavior.html">
-<link rel="import" href="../paper-styles/element-styles/paper-material.html">
+<link rel="import" href="../paper-styles/element-styles/paper-material-styles.html">
 
 <!--
 Material design: [Buttons](https://www.google.com/design/spec/components/buttons.html)
@@ -83,7 +83,7 @@ Custom property | Description | Default
 
 <dom-module id="paper-button">
   <template strip-whitespace>
-    <style include="paper-material">
+    <style include="paper-material-styles">
       /* Need to specify the same specificity as the styles imported from paper-material. */
       :host {
         @apply --layout-inline;
@@ -106,7 +106,7 @@ Custom property | Description | Default
         cursor: pointer;
         z-index: 0;
         padding: 0.7em 0.57em;
-        
+
         @apply --paper-font-common-base;
         @apply --paper-button;
       }
