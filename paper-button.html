@@ -183,6 +183,27 @@ Custom property | Description | Default
           reflectToAttribute: true,
           value: false,
           observer: '_calculateElevation'
+        },
+
+        /**
+         * If true, the button will forward keyboard clicks (enter/space) to
+         * the parent anchor element found if exists
+         */
+        link: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        }
+      },
+
+      listeners: {
+        tap: '_onTap'
+      },
+
+      _onTap: function (ev) {
+        if (this.link && this.parentNode && this.parentNode.tagName === 'A') {
+          // Click the anchor if exists.
+          this.parentNode.click();
         }
       },
 
