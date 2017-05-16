@@ -131,6 +131,15 @@ Custom property | Description | Default
         @apply --paper-material-elevation-5;
       }
 
+      :host::after {
+        content: '';
+        position: absolute;
+        top: -0.429em;
+        bottom: -0.429em;
+        left: 0;
+        right: 0;
+      }
+
       :host([hidden]) {
         display: none !important;
       }
