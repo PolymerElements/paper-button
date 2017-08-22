@@ -1,9 +1,30 @@
 {
-  "name": "paper-button",
-  "version": "2.0.0",
-  "private": true,
-  "main": "index.js",
-  "repository": "https://github.com/PolymerElements/paper-button.git",
-  "author": "Justin Fagnani <justinfagnani@google.com>",
-  "license": "MIT"
+  "name": "@polymer/paper-button",
+  "flat": true,
+  "version": "3.0.0-pre.1",
+  "description": "Material design button",
+  "contributors": [
+    "The Polymer Authors"
+  ],
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer",
+    "paper",
+    "button"
+  ],
+  "main": "paper-button.html",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/paper-button.git"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/PolymerElements/paper-button",
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0-pre.1",
+    "@polymer/iron-flex-layout": "^3.0.0-pre.1",
+    "@polymer/paper-behaviors": "^3.0.0-pre.1",
+    "@polymer/paper-styles": "^3.0.0-pre.1"
+  },
+  "devDependencies": {}
 }
