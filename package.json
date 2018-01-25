@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/PolymerElements/paper-button.git",
   "author": "Justin Fagnani <justinfagnani@google.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@polymer/gen-typescript-declarations": "^1.0.0"
+  },
+  "scripts": {
+    "update-types": "rm -f *.d.ts **/*.d.ts && gen-typescript-declarations --outDir ."
+  }
 }
