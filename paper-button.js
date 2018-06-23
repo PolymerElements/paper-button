@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -6,14 +6,8 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../paper-behaviors/paper-button-behavior.html">
-<link rel="import" href="../paper-styles/element-styles/paper-material-styles.html">
-
-<!--
+*/
+/**
 Material design: [Buttons](https://www.google.com/design/spec/components/buttons.html)
 
 `paper-button` is a button. When the user touches the button, a ripple effect emanates
@@ -79,10 +73,23 @@ Custom property | Description | Default
 `--paper-button-raised-keyboard-focus` | Mixin applied to a raised button after it's been focused using the keyboard | `{}`
 
 @demo demo/index.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="paper-button">
-  <template strip-whitespace>
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import { PaperButtonBehavior, PaperButtonBehaviorImpl } from '@polymer/paper-behaviors/paper-button-behavior.js';
+import '@polymer/paper-styles/element-styles/paper-material-styles.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+const $_documentContainer = document.createElement('template');
+$_documentContainer.setAttribute('style', 'display: none;');
+
+$_documentContainer.innerHTML = `<dom-module id="paper-button">
+  <template strip-whitespace="">
     <style include="paper-material-styles">
       /* Need to specify the same specificity as the styles imported from paper-material. */
       :host {
@@ -169,40 +176,41 @@ Custom property | Description | Default
     <slot></slot>
   </template>
 
-  <script>
-    Polymer({
-      is: 'paper-button',
+  
+</dom-module>`;
 
-      behaviors: [Polymer.PaperButtonBehavior],
+document.head.appendChild($_documentContainer.content);
+Polymer({
+  is: 'paper-button',
 
-      properties: {
-        /**
-         * If true, the button should be styled with a shadow.
-         */
-        raised: {
-          type: Boolean,
-          reflectToAttribute: true,
-          value: false,
-          observer: '_calculateElevation'
-        }
-      },
+  behaviors: [PaperButtonBehavior],
 
-      _calculateElevation: function() {
-        if (!this.raised) {
-          this._setElevation(0);
-        } else {
-          Polymer.PaperButtonBehaviorImpl._calculateElevation.apply(this);
-        }
-      }
+  properties: {
+    /**
+     * If true, the button should be styled with a shadow.
+     */
+    raised: {
+      type: Boolean,
+      reflectToAttribute: true,
+      value: false,
+      observer: '_calculateElevation'
+    }
+  },
 
-      /**
-      Fired when the animation finishes.
-      This is useful if you want to wait until
-      the ripple animation finishes to perform some action.
+  _calculateElevation: function() {
+    if (!this.raised) {
+      this._setElevation(0);
+    } else {
+      PaperButtonBehaviorImpl._calculateElevation.apply(this);
+    }
+  }
 
-      @event transitionend
-      Event param: {{node: Object}} detail Contains the animated node.
-      */
-    });
-  </script>
-</dom-module>
+  /**
+  Fired when the animation finishes.
+  This is useful if you want to wait until
+  the ripple animation finishes to perform some action.
+
+  @event transitionend
+  Event param: {{node: Object}} detail Contains the animated node.
+  */
+});
