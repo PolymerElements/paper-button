@@ -98,14 +98,16 @@ Custom property | Description | Default
         font: inherit;
         text-transform: uppercase;
         outline-width: 0;
-        border-radius: 3px;
+        border-radius: 2px;
         -moz-user-select: none;
         -ms-user-select: none;
         -webkit-user-select: none;
         user-select: none;
         cursor: pointer;
         z-index: 0;
-        padding: 0.7em 0.57em;
+        padding: 0 1em;
+        height: 2.5em;
+        font-weight: 500;
 
         @apply --paper-font-common-base;
         @apply --paper-button;
@@ -146,8 +148,8 @@ Custom property | Description | Default
       }
 
       :host([disabled]) {
-        background: #eaeaea;
-        color: #a8a8a8;
+        background: rgba(0, 0, 0, 0.12);
+        color: rgba(0, 0, 0, 0.26);
         cursor: auto;
         pointer-events: none;
 
@@ -160,6 +162,11 @@ Custom property | Description | Default
 
       paper-ripple {
         color: var(--paper-button-ink-color);
+      }
+
+      ::slotted(iron-icon) {
+        height: 1.3333em;
+        width: 1.3333em;
       }
     </style>
 
