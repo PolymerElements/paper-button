@@ -11,9 +11,10 @@ found at http://polymer.github.io/PATENTS.txt
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-styles/element-styles/paper-material-styles.js';
 
-import {html} from '@polymer/polymer/polymer-legacy.js';
 import {PaperButtonBehavior, PaperButtonBehaviorImpl} from '@polymer/paper-behaviors/paper-button-behavior.js';
 import {Polymer} from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import {html} from '@polymer/polymer/polymer-legacy.js';
+
 /**
 Material design:
 [Buttons](https://www.google.com/design/spec/components/buttons.html)
