@@ -147,13 +147,17 @@ const template = html`
     }
 
     :host([disabled]) {
-      background: #eaeaea;
       color: #a8a8a8;
       cursor: auto;
       pointer-events: none;
 
       @apply --paper-button-disabled;
     }
+
+    :host([disabled][raised]) {
+      background: #eaeaea;
+    }
+
 
     :host([animated]) {
       @apply --shadow-transition;
