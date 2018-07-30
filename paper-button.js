@@ -147,6 +147,7 @@ const template = html`
     }
 
     :host([disabled]) {
+      background: none;
       color: #a8a8a8;
       cursor: auto;
       pointer-events: none;
