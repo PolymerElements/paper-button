@@ -23,8 +23,7 @@
     "@polymer/test-fixture": "^3.0.0-pre.20",
     "wct-browser-legacy": "^1.0.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",
-    "@polymer/gen-typescript-declarations": "^1.5.0",
-    "lodash": "^3.0.0"
+    "@polymer/gen-typescript-declarations": "^1.5.0"
   },
   "scripts": {
     "format": "webmat",
