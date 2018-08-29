@@ -16,11 +16,11 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "webmat": "^0.2.0",
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.22",
-    "@polymer/iron-icon": "^3.0.0-pre.22",
-    "@polymer/iron-icons": "^3.0.0-pre.22",
-    "@polymer/iron-test-helpers": "^3.0.0-pre.22",
-    "@polymer/test-fixture": "^4.0.0-pre.0",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.24",
+    "@polymer/iron-icon": "^3.0.0-pre.24",
+    "@polymer/iron-icons": "^3.0.0-pre.24",
+    "@polymer/iron-test-helpers": "^3.0.0-pre.24",
+    "@polymer/test-fixture": "^4.0.0-pre.2",
     "wct-browser-legacy": "^1.0.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "@polymer/gen-typescript-declarations": "^1.5.1"
@@ -35,8 +35,8 @@
   "author": "The Polymer Authors",
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
-    "@polymer/iron-flex-layout": "^3.0.0-pre.22",
-    "@polymer/paper-behaviors": "^3.0.0-pre.23",
-    "@polymer/paper-styles": "^3.0.0-pre.22"
+    "@polymer/iron-flex-layout": "^3.0.0-pre.24",
+    "@polymer/paper-behaviors": "^3.0.0-pre.25",
+    "@polymer/paper-styles": "^3.0.0-pre.24"
   }
 }
