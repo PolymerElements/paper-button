@@ -17,9 +17,9 @@
   "devDependencies": {
     "webmat": "^0.2.0",
     "@polymer/iron-demo-helpers": "^3.0.1",
-    "@polymer/iron-icon": "^3.0.0-pre.25",
-    "@polymer/iron-icons": "^3.0.0-pre.25",
-    "@polymer/iron-test-helpers": "^3.0.0-pre.25",
+    "@polymer/iron-icon": "^3.0.0-pre.26",
+    "@polymer/iron-icons": "^3.0.0-pre.26",
+    "@polymer/iron-test-helpers": "^3.0.0-pre.26",
     "@polymer/test-fixture": "^4.0.1",
     "wct-browser-legacy": "^1.0.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",
@@ -35,8 +35,8 @@
   "author": "The Polymer Authors",
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
-    "@polymer/iron-flex-layout": "^3.0.0-pre.25",
-    "@polymer/paper-behaviors": "^3.0.0-pre.26",
-    "@polymer/paper-styles": "^3.0.0-pre.25"
+    "@polymer/iron-flex-layout": "^3.0.0-pre.26",
+    "@polymer/paper-behaviors": "^3.0.0-pre.27",
+    "@polymer/paper-styles": "^3.0.0-pre.26"
   }
 }
